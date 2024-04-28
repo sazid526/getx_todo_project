@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_todo_project/app/core/utils/extensions.dart';
@@ -6,6 +7,7 @@ import 'package:getx_todo_project/app/core/values/colors.dart';
 import 'package:getx_todo_project/app/core/values/icons.dart';
 import 'package:getx_todo_project/app/modules/home/home_controller.dart';
 import 'package:getx_todo_project/app/modules/home/widgets/add_card.dart';
+import 'package:getx_todo_project/app/modules/home/widgets/add_dialog.dart';
 import 'package:getx_todo_project/app/modules/home/widgets/task_card.dart';
 import 'package:getx_todo_project/app/modules/task.dart';
 
@@ -33,9 +35,10 @@ class HomePage extends GetView<HomeController> {
                 physics: const ClampingScrollPhysics(),
                 children: [
                   ...controller.tasks
-                      .map((element) => LongPressDraggable(
+                      .map((element) => LongPressDraggable(data: element,
                           onDragStarted: () => controller.changeDeleting(true),
-                          onDraggableCanceled: (_,__) => controller.changeDeleting(false),
+                          onDraggableCanceled: (_, __) =>
+                              controller.changeDeleting(false),
                           onDragEnd: (_) => controller.changeDeleting(false),
                           feedback: Opacity(
                             opacity: 0.8,
@@ -49,6 +52,31 @@ class HomePage extends GetView<HomeController> {
             )
           ],
         ),
+      ),
+      floatingActionButton: DragTarget(
+        builder: (_,__,___){
+          return  Obx(
+                () => FloatingActionButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)
+              ),
+              backgroundColor: controller.deleting.value ? Colors.red : blue,
+              foregroundColor: Colors.white,
+              onPressed: () {
+                if(controller.tasks.isNotEmpty){
+                  Get.to( AddDialog(), transition: Transition.downToUp);
+                }else{
+                  EasyLoading.showInfo("Please create your new task type");
+                }
+              },
+              child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
+            ),
+          );
+        },
+        onAccept: (Task task){
+          controller.deleteTask(task);
+          EasyLoading.showSuccess("Delete Success");
+        },
       ),
     );
   }
