@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:getx_todo_project/app/data/services/storage/services.dart';
 import 'package:getx_todo_project/app/modules/home/home_binding.dart';
-import 'package:getx_todo_project/app/modules/home/home_page.dart';
+import 'package:getx_todo_project/app/modules/home/home_screen.dart';
 
 void main() async{
   await GetStorage.init();
