@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_todo_project/app/core/utils/extensions.dart';
 import 'package:getx_todo_project/app/modules/detail/widgets/doing_list.dart';
+import 'package:getx_todo_project/app/modules/detail/widgets/done_list.dart';
 import 'package:getx_todo_project/app/modules/home/home_controller.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -122,7 +123,8 @@ class DetailScreen extends StatelessWidget {
                     )),
               ),
             ),
-            DoingList()
+            DoingList(),
+            DoneList(),
           ],
         ),
       ),

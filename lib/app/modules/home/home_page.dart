@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_todo_project/app/core/utils/extensions.dart';
 import 'package:getx_todo_project/app/core/values/colors.dart';
-import 'package:getx_todo_project/app/core/values/icons.dart';
 import 'package:getx_todo_project/app/modules/home/home_controller.dart';
 import 'package:getx_todo_project/app/modules/home/widgets/add_card.dart';
 import 'package:getx_todo_project/app/modules/home/widgets/add_dialog.dart';
